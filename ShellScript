@@ -1,0 +1,78 @@
+
+Marco C <marcocalvojimenez@gmail.com>
+14:51 (hace 0 minutos)
+para mí
+
+#!/bin/bash
+
+echo "Buenos días, el funcionamiento de este guión es borrar directorios y archivos que se encuentren vacios"
+
+
+read -p "¿Que desea usted borrar, directorios o archivos? (d/a): " respuesta
+
+case $respuesta in
+
+d) echo "Comencemos con los directorios"
+
+for directorio in *
+
+do
+
+if [[ -d $directorio ]]; then
+
+echo "$directorio es un directorio"
+echo "Viendo a ver si está vacio..."
+
+if [[ $(cat $directorio | wc -l) -eq 0 ]]; then
+echo "El directorio $directorio está vacio, borrando directorio..."
+rm -rf $directorio
+
+else
+echo "El directorio $directorio no está vacio, se deja igual"
+
+fi
+
+fi
+
+done
+
+echo "Hemos acabado con los directorios"
+
+;;
+
+
+a) echo "Comencemos con los archivos"
+
+for archivo in *
+
+do
+
+if [[ -f $archivo ]]; then
+
+echo "$archivo es un archivo"
+echo "Viendo a ver si está vacio..."
+
+if [[ $(cat $archivo | wc -l) -eq 0 ]]; then
+echo "El archivo $archivo está vacio, borrando $archivo..."
+rm -rf $archivo
+else
+echo "El archivo $archivo no está vacio, se deja igual"
+
+fi
+
+fi
+
+done
+
+echo "Hemos acabado con los archivos"
+
+;;
+
+
+*) echo "A dar por culo a tu casa payaso"
+
+;;
+
+esac
+
+echo "Fin del guión"
